@@ -35,7 +35,11 @@ function applyTheme(theme) {
   }
 }
 
-applyTheme(localStorage.getItem(THEME_KEY));
+const savedTheme = localStorage.getItem(THEME_KEY);
+const systemPrefersDark = window.matchMedia(
+  "(prefers-color-scheme: dark)",
+).matches;
+applyTheme(savedTheme || (systemPrefersDark ? "dark" : "light"));
 
 if (themeToggle) {
   themeToggle.addEventListener("click", () => {
@@ -82,21 +86,57 @@ const projects = [
     category: "css",
     description: "A header that collapses into a menu button on small screens.",
   },
+  {
+    title: "Expense Tracker",
+    category: "js",
+    description:
+      "Records expenses, calculates the total, highlights the largest expense, and saves entries in local storage.",
+  },
+  {
+    title: "Quiz App",
+    category: "js",
+    description:
+      "A six-question web development quiz that tracks the score and can be restarted.",
+  },
+  {
+    title: "UNDERTAKERS Team Website",
+    category: "git",
+    description:
+      "A four-page team website built collaboratively with GitHub and shared version control.",
+  },
 ];
 
-const categoryNames = { html: "HTML", css: "CSS", js: "JavaScript" };
+const categoryNames = {
+  html: "HTML",
+  css: "CSS",
+  js: "JavaScript",
+  git: "Git",
+};
 
 const projectList = document.querySelector("#project-list");
 const projectCount = document.querySelector("#project-count");
+const projectSearch = document.querySelector("#project-search");
 const filterButtons = document.querySelectorAll(".filter-btn");
+let activeCategory = "all";
 
-function renderProjects(filter) {
-  const visible =
-    filter === "all"
-      ? projects
-      : projects.filter((project) => project.category === filter);
+function renderProjects() {
+  const query = projectSearch ? projectSearch.value.trim().toLowerCase() : "";
+  const visible = projects.filter((project) => {
+    const matchesCategory =
+      activeCategory === "all" || project.category === activeCategory;
+    const searchableText =
+      `${project.title} ${project.description}`.toLowerCase();
+    const matchesSearch = searchableText.includes(query);
+    return matchesCategory && matchesSearch;
+  });
 
   projectList.replaceChildren();
+
+  if (visible.length === 0) {
+    projectCount.textContent =
+      "No projects match that search and category. Try another search or filter.";
+    return;
+  }
 
   visible.forEach((project) => {
     const card = document.createElement("article");
@@ -120,13 +160,18 @@ function renderProjects(filter) {
 }
 
 if (projectList) {
-  renderProjects("all");
+  renderProjects();
+
+  if (projectSearch) {
+    projectSearch.addEventListener("input", renderProjects);
+  }
 
   filterButtons.forEach((button) => {
     button.addEventListener("click", () => {
+      activeCategory = button.dataset.filter;
       filterButtons.forEach((btn) => btn.setAttribute("aria-pressed", "false"));
       button.setAttribute("aria-pressed", "true");
-      renderProjects(button.dataset.filter);
+      renderProjects();
     });
   });
 }

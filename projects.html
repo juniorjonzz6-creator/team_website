@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Projects built by Team Byte while learning web development."
+      content="Projects built by UNDERTAKERS while learning web development."
     />
-    <title>Projects | Team Byte</title>
+    <title>Projects | UNDERTAKERS</title>
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/script.js" defer></script>
   </head>
@@ -16,7 +16,7 @@
 
     <header class="site-header">
       <div class="container header-inner">
-        <a class="logo" href="index.html">Team Byte</a>
+        <a class="logo" href="index.html">UNDERTAKERS</a>
         <button
           class="nav-toggle"
           type="button"
@@ -30,6 +30,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="projects.html" aria-current="page">Projects</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="faq.html">FAQ</a></li>
           </ul>
         </nav>
         <button class="theme-toggle" type="button" aria-pressed="false">
@@ -42,14 +43,26 @@
       <header class="page-header">
         <h1>Our projects</h1>
         <p class="lead">
-          Small exercises we built while learning. Filter them by technology.
+          Small exercises we built while learning. Search or filter them by
+          category.
         </p>
       </header>
+
+      <div class="field project-search">
+        <label for="project-search">Search projects</label>
+        <input
+          type="search"
+          id="project-search"
+          name="project-search"
+          placeholder="Try “quiz” or “local storage”"
+          autocomplete="off"
+        />
+      </div>
 
       <div
         class="filters"
         role="group"
-        aria-label="Filter projects by technology"
+        aria-label="Filter projects by category"
       >
         <button
           class="filter-btn"
@@ -83,6 +96,14 @@
         >
           JavaScript
         </button>
+        <button
+          class="filter-btn"
+          type="button"
+          data-filter="git"
+          aria-pressed="false"
+        >
+          Git
+        </button>
       </div>
 
       <p id="project-count" class="project-count" aria-live="polite"></p>
@@ -95,7 +116,7 @@
 
     <footer class="site-footer">
       <div class="container">
-        <p>© <span id="year">2026</span> Team Byte. Built for CSC 216.</p>
+        <p>© <span id="year">2026</span> UNDERTAKERS. Built for CSC 216.</p>
       </div>
     </footer>
   </body>

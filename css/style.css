@@ -9,8 +9,8 @@
   --color-surface: #ffffff;
   --color-text: #1c2430;
   --color-muted: #5a6474;
-  --color-primary: #0f6e6e;
-  --color-primary-dark: #0a5050;
+  --color-primary: #4c1d95;
+  --color-primary-dark: #2e1065;
   --color-on-primary: #ffffff;
   --color-border: #dde1e6;
   --color-error: #b3261e;
@@ -34,8 +34,8 @@ body.dark {
   --color-surface: #1a212b;
   --color-text: #e7ebf0;
   --color-muted: #a2abb9;
-  --color-primary: #4fc1c1;
-  --color-primary-dark: #83d8d8;
+  --color-primary: #c4b5fd;
+  --color-primary-dark: #a78bfa;
   --color-on-primary: #0b1f1f;
   --color-border: #2b3340;
   --color-error: #ff8a80;
@@ -260,12 +260,28 @@ img {
   background-color: var(--color-surface);
 }
 
+.profile-picture {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.portrait {
+  display: block;
+  width: 96px;
+  height: 120px;
+  border-radius: 8px;
+  object-fit: cover;
+  object-position: center top;
+}
+
 .avatar {
   display: grid;
   place-items: center;
   width: 64px;
   height: 64px;
-  margin-bottom: var(--space-2);
+  margin-bottom: 0;
   border-radius: 50%;
   background-color: var(--color-primary);
   color: var(--color-on-primary);
@@ -312,6 +328,22 @@ img {
 
 .project-count {
   color: var(--color-muted);
+}
+
+.faq-list {
+  display: grid;
+  max-width: 800px;
+  gap: var(--space-2);
+}
+
+.faq-list summary {
+  color: var(--color-text);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.faq-list p:last-child {
+  margin-bottom: 0;
 }
 
 .tag {
